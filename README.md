@@ -23,14 +23,38 @@ npx github:muzzary/mimicfable --skills      skills only
 npx github:muzzary/mimicfable --uninstall   remove everything it installed
 ```
 
-No npm registry involved and no dependencies: npx pulls this repo and runs a small
-copy script (`bin/install.js`, about 100 lines, readable in one sitting). Prefer not
-to pipe code from the internet? Clone the repo, read the script, then run
-`node bin/install.js` yourself. Rerunning updates files in place.
+### Other coding agents (Codex, Copilot, Cursor, Gemini CLI)
 
-After installing: delegate big tasks with "use the fable-engineer agent to ..." and
-invoke skills inline with `/fable-problem-solving`, `/fable-code-craft`,
-`/fable-phase-planning`, or `/fable-scope-control`.
+The same discipline works outside Claude Code. `PORTABLE.md` is a tool-agnostic
+version of the agent and all four skills, and the installer knows where each tool
+reads its instructions:
+
+```
+npx github:muzzary/mimicfable --codex       OpenAI Codex CLI (global ~/.codex/AGENTS.md)
+npx github:muzzary/mimicfable --copilot     GitHub Copilot (this project's .github/copilot-instructions.md)
+npx github:muzzary/mimicfable --cursor      Cursor (this project's .cursor/rules/)
+npx github:muzzary/mimicfable --gemini      Gemini CLI (global ~/.gemini/GEMINI.md)
+npx github:muzzary/mimicfable --agents-md   plain AGENTS.md in this project (the emerging universal standard)
+```
+
+Flags combine freely (`--codex --cursor`). Project-scope flags write relative to the
+directory you run the command in. If the target file already exists, the instructions
+are added inside `<!-- mimicfable -->` marker comments: your existing content is never
+touched, reruns update only the marked block, and `--uninstall` removes only that
+block. That safety behavior is tested.
+
+One honest note: the benchmark in this repo was run on Claude models only. The
+portable instructions carry the same rules to other tools, but we have not measured
+their effect on Codex, Copilot, Cursor, or Gemini.
+
+No npm registry involved and no dependencies: npx pulls this repo and runs a small
+copy script (`bin/install.js`, readable in one sitting). Prefer not to pipe code from
+the internet? Clone the repo, read the script, then run `node bin/install.js`
+yourself. Rerunning updates files in place.
+
+After installing for Claude Code: delegate big tasks with "use the fable-engineer
+agent to ..." and invoke skills inline with `/fable-problem-solving`,
+`/fable-code-craft`, `/fable-phase-planning`, or `/fable-scope-control`.
 
 ## What the agent is
 
