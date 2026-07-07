@@ -198,6 +198,33 @@ failure scenarios, separated scope reporting, stricter plan structure) more than
 change what gets found or fixed. Opus finds the bugs either way; the skills change
 what it does around them.
 
+## Real-world spot check (beyond the benchmark)
+
+We also ran the agent against a real, private commercial website (a confidential
+project, so no name and no code, only what the agent achieved). Nothing was planted;
+the codebase was messy production work the agent had never seen. In one
+assessment-only pass it:
+
+- traced the site's generic "AI-assembled" look to a root cause nobody had spotted:
+  a silently broken CSS design-token layer, with 100+ declarations referencing
+  custom properties that were never defined, and the 35+ `!important` overrides
+  developers had piled on to compensate
+- quantified the inconsistency instead of hand-waving it: 17 border-radius values
+  against 3 declared tokens, 111 gradients, 74 shadows, a referenced font that was
+  never imported, and text contrast below the accessibility floor
+- located the classic AI tells with file and line citations: emoji used as icons
+  next to an existing professional SVG set, a particles-and-glow hero stack, dead
+  placeholder links, cloned testimonials, one landing-page typo
+- delivered a phased fix plan whose first four phases touch one shared stylesheet
+  plus a few templates for roughly 80 percent of the improvement, all within the
+  owner's hard constraints (same palette, same structure)
+- flagged the risk inside its own top recommendation and stated what it had not
+  verified, unprompted
+
+Details in `results/case-study-frontend-audit.md`. Same honesty rule as everywhere
+else in this repo: it is one run on one codebase we cannot show you, so treat it as
+a qualitative demonstration, not a metric.
+
 ## A confound we found and want you to know about
 
 Partway through the skill tests we noticed the "plain Opus" baseline referencing
