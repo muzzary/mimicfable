@@ -1,0 +1,27 @@
+{
+  "name": "mimicfable",
+  "version": "1.0.0",
+  "description": "One-command installer for the fable-engineer Claude Code agent and the four fable skills",
+  "bin": {
+    "mimicfable": "bin/install.js"
+  },
+  "files": [
+    "bin",
+    "skills",
+    "fable-engineer.md"
+  ],
+  "engines": {
+    "node": ">=16"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/muzzary/mimicfable.git"
+  },
+  "keywords": [
+    "claude",
+    "claude-code",
+    "agent",
+    "skills"
+  ],
+  "license": "MIT"
+}

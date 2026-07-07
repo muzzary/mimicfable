@@ -5,6 +5,33 @@ fully reproducible benchmark comparing it against plain Claude Opus on identical
 tasks. Every number below comes from real runs, graded by hidden test suites the agents
 never saw. Nothing is projected, extrapolated, or borrowed from other benchmarks.
 
+## Install
+
+One command, needs Node 16+ and git:
+
+```
+npx github:muzzary/mimicfable
+```
+
+That installs the fable-engineer agent into `~/.claude/agents/` and all four skills
+into `~/.claude/skills/`, where Claude Code picks them up on your next session.
+Options:
+
+```
+npx github:muzzary/mimicfable --agent       agent only
+npx github:muzzary/mimicfable --skills      skills only
+npx github:muzzary/mimicfable --uninstall   remove everything it installed
+```
+
+No npm registry involved and no dependencies: npx pulls this repo and runs a small
+copy script (`bin/install.js`, about 100 lines, readable in one sitting). Prefer not
+to pipe code from the internet? Clone the repo, read the script, then run
+`node bin/install.js` yourself. Rerunning updates files in place.
+
+After installing: delegate big tasks with "use the fable-engineer agent to ..." and
+invoke skills inline with `/fable-problem-solving`, `/fable-code-craft`,
+`/fable-phase-planning`, or `/fable-scope-control`.
+
 ## What the agent is
 
 fable-engineer is a system prompt (an agent definition) that makes Claude Opus work the
