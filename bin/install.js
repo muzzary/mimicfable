@@ -54,6 +54,9 @@ const TARGETS = {
   cursor: {
     file: () => path.join(cwd, ".cursor", "rules", "mimicfable.mdc"),
     scope: "project",
+    // Cursor .mdc rules need frontmatter to know when to attach; without
+    // alwaysApply the rule is listed but never activates.
+    header: "---\ndescription: mimicfable engineering discipline\nalwaysApply: true\n---\n\n",
   },
   gemini: { file: () => path.join(home, ".gemini", "GEMINI.md"), scope: "global" },
   "agents-md": { file: () => path.join(cwd, "AGENTS.md"), scope: "project" },
@@ -84,11 +87,11 @@ function portableBlock() {
 }
 
 // Insert or replace the marker block; never touch anything outside it.
-function upsert(file) {
+function upsert(file, header) {
   fs.mkdirSync(path.dirname(file), { recursive: true });
   const block = portableBlock();
   if (!fs.existsSync(file)) {
-    fs.writeFileSync(file, block + "\n");
+    fs.writeFileSync(file, (header || "") + block + "\n");
     return "installed";
   }
   const current = fs.readFileSync(file, "utf8");
@@ -104,7 +107,7 @@ function upsert(file) {
   return "appended to";
 }
 
-function removeBlock(file) {
+function removeBlock(file, header) {
   if (!fs.existsSync(file)) return false;
   const current = fs.readFileSync(file, "utf8");
   const begin = current.indexOf(BEGIN);
@@ -113,7 +116,9 @@ function removeBlock(file) {
   const remainder = (
     current.slice(0, begin) + current.slice(end + END.length)
   ).trim();
-  if (remainder === "") {
+  // A remainder that is just our own header (e.g. cursor frontmatter) means
+  // the file was entirely ours - remove it rather than leaving an empty shell.
+  if (remainder === "" || (header && remainder === header.trim())) {
     fs.unlinkSync(file);
   } else {
     fs.writeFileSync(file, remainder + "\n");
@@ -158,7 +163,7 @@ function uninstall() {
     }
   }
   for (const [name, target] of Object.entries(TARGETS)) {
-    if (removeBlock(target.file())) {
+    if (removeBlock(target.file(), target.header)) {
       console.log(`removed  ${name} block   ${target.file()}`);
     }
   }
@@ -184,7 +189,7 @@ try {
 
   for (const tool of otherTools) {
     const target = TARGETS[tool];
-    const verb = upsert(target.file());
+    const verb = upsert(target.file(), target.header);
     console.log(`${verb}  ${tool} (${target.scope})   ${target.file()}`);
   }
 

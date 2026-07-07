@@ -118,9 +118,8 @@ def main():
         passed = sum(1 for name, fn in checks.items() if check(name, fn, failures))
         total = len(checks)
     except Exception as e:
-        passed, total = 0, len(grader.__defaults__ or []) or -1
+        passed, total = 0, 0
         failures.append(f"import/setup failed: {type(e).__name__}: {e}")
-        total = 0
     result = {
         "task": task,
         "passed": passed,

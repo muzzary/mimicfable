@@ -5,6 +5,9 @@
   "bin": {
     "mimicfable": "bin/install.js"
   },
+  "scripts": {
+    "test": "node --test test/install.test.js"
+  },
   "files": [
     "bin",
     "skills",

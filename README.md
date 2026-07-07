@@ -41,7 +41,14 @@ Flags combine freely (`--codex --cursor`). Project-scope flags write relative to
 directory you run the command in. If the target file already exists, the instructions
 are added inside `<!-- mimicfable -->` marker comments: your existing content is never
 touched, reruns update only the marked block, and `--uninstall` removes only that
-block. That safety behavior is tested.
+block. That safety behavior is covered by the test suite in `test/`; run it yourself
+with `npm test`.
+
+Two things worth knowing. Rerunning the installer overwrites the Claude agent and
+skill files it manages, so if you customize your installed copies, keep your changes
+under a different name. And the published agent follows YOUR configuration: if its
+instructions conflict with your own CLAUDE.md or project rules, yours win, and it
+never pushes to a remote unless your workflow says to.
 
 One honest note: the benchmark in this repo was run on Claude models only. The
 portable instructions carry the same rules to other tools, but we have not measured

@@ -7,6 +7,8 @@ description: Makes the model tackle problems the way Fable 5 does - gather conte
 
 Follow these five phases in order. Do not skip ahead and do not loop back unless verification fails.
 
+Calibration: for a simple question or a one-line fix, the phases collapse into a single pass (look, act, verify, answer) - do not perform ceremony. The full weight applies to real debugging and multi-step work.
+
 ## 1. Gather before acting
 
 - Before touching anything, collect the context needed to understand the problem: read the relevant files, error output, and recent changes. Run independent searches/reads **in parallel**, not one at a time.
