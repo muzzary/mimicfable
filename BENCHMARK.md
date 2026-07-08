@@ -102,6 +102,36 @@ with 7 spec requirements, graded end-to-end via subprocess (`grade_t4.py`).
   hiccup, ~35k tokens) and was restarted; the stalled attempt's tokens are excluded
   from the totals above and disclosed here.
 
+## Skill tests (one run each vs baseline)
+
+The four skills were tested separately from the agent:
+
+- **Review test** (t5, three planted bugs plus style bait): both conditions found all
+  three bugs and the dead code. The skill-guided review attached a concrete failure
+  scenario to every finding and reported zero style nitpicks; the baseline included a
+  docstring nitpick. Verbatim reports in `results/*/t5_review/`.
+- **Debugging test** (t6, crash whose root cause was a truthiness bug): tie, 2/2
+  hidden checks both sides.
+- **Scope test** (t7, one bug in a repo full of bait): both fixed it 4/4 with
+  identical 4-line diffs. The skill run delivered a "noticed, not touched" list and
+  kept build artifacts untracked; the baseline committed a compiled `.pyc` file.
+- **Planning test** (t8, same CLI spec planned by both): both strong; the skill plan
+  had a runnable acceptance test on all six phases (baseline 4/6) and an explicit
+  out-of-scope list (baseline none). Verbatim plans in `results/*/t8_plan/`.
+
+Honest read: on single runs the skills sharpen output discipline more than they
+change what gets found.
+
+## Disclosed confound: the baseline was not bare Opus
+
+Partway through the skill tests we noticed baseline agents using vocabulary from the
+repo owner's global CLAUDE.md, which Claude Code injects into every agent on the
+machine. Every baseline in this benchmark is therefore "Opus plus a strong personal
+engineering standards file", not stock Opus. Two consequences: the deltas here
+likely UNDERSTATE what the agent and skills add over a stock setup, and a good
+CLAUDE.md already buys real discipline by itself. We disclosed rather than reran:
+the disciplined baseline is also the realistic one.
+
 ## Limitations
 
 - n = 1 run per cell; LLM output varies between runs. Token/time deltas within ~±20%

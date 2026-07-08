@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 420" role="img" aria-label="mimicfable">
+  <rect width="1600" height="420" fill="#0a0a0b"/>
+
+  <!-- subtle frame -->
+  <rect x="24" y="24" width="1552" height="372" fill="none" stroke="#26262a" stroke-width="1"/>
+
+  <!-- faint grid accents -->
+  <line x1="24" y1="210" x2="380" y2="210" stroke="#1c1c20" stroke-width="1"/>
+  <line x1="1220" y1="210" x2="1576" y2="210" stroke="#1c1c20" stroke-width="1"/>
+
+  <!-- title -->
+  <text x="800" y="175" text-anchor="middle"
+        font-family="ui-monospace, SFMono-Regular, Consolas, 'Courier New', monospace"
+        font-size="92" font-weight="600" letter-spacing="6" fill="#d4d4d8">mimicfable</text>
+
+  <!-- tagline -->
+  <text x="800" y="235" text-anchor="middle"
+        font-family="'Segoe UI', Helvetica, Arial, sans-serif"
+        font-size="26" letter-spacing="2" fill="#8b8b93">Fable 5's engineering discipline, installable in any coding agent</text>
+
+  <!-- discipline chain -->
+  <text x="800" y="298" text-anchor="middle"
+        font-family="ui-monospace, SFMono-Regular, Consolas, 'Courier New', monospace"
+        font-size="19" letter-spacing="1" fill="#5f5f66">gather · diagnose · build · verify · report</text>
+
+  <!-- install command -->
+  <rect x="580" y="326" width="440" height="44" rx="6" fill="#121214" stroke="#2a2a2f" stroke-width="1"/>
+  <text x="800" y="354" text-anchor="middle"
+        font-family="ui-monospace, SFMono-Regular, Consolas, 'Courier New', monospace"
+        font-size="19" fill="#a1a1aa">npx github:muzzary/mimicfable</text>
+
+  <!-- corner marks -->
+  <text x="52" y="66" font-family="ui-monospace, Consolas, monospace" font-size="15" letter-spacing="1" fill="#48484f">claude-code · codex · copilot · cursor · gemini</text>
+  <text x="1548" y="66" text-anchor="end" font-family="ui-monospace, Consolas, monospace" font-size="15" letter-spacing="1" fill="#48484f">honestly benchmarked</text>
+  <text x="52" y="374" font-family="ui-monospace, Consolas, monospace" font-size="15" fill="#3c3c42">MIT</text>
+  <text x="1548" y="374" text-anchor="end" font-family="ui-monospace, Consolas, monospace" font-size="15" fill="#3c3c42">open for contribution</text>
+</svg>

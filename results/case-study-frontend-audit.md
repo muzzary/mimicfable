@@ -62,3 +62,40 @@ constraint-respecting plan with its own uncertainty stated.
 Same honesty as the benchmark: this is one run on one codebase, the codebase
 cannot be shared, and you have to take our word for the specifics. Treat it as a
 qualitative demonstration, not a metric.
+
+## Part 2: the agent implemented its own audit
+
+The owner approved the plan, and the agent then implemented all eight phases in
+two delegated runs (four phases each), one commit per phase on feature branches,
+each merged only after the owner's manual visual pass. Both merges shipped with
+zero requested corrections. What the runs demonstrated beyond the audit:
+
+- **Judgment over literalism.** The audit's sample fix listed a five-step font
+  scale; the stylesheet actually used ten steps. The agent completed the full
+  scale with a stated rationale, where a literal reading would have left every
+  heading broken.
+- **Restraint under ambiguity, repeatedly.** It refused to remap 73 colored glow
+  shadows onto neutral tokens (would have stripped intentional accents), left
+  ambiguous radii alone rather than guess, deferred an underspecified cleanup it
+  could not visually verify, and skipped a contrast bump after computing the
+  value already passed accessibility (bumping would have over-emphasized a
+  deliberately de-emphasized price).
+- **It corrected its own earlier report.** Mid-implementation it flagged that
+  one claim from its own audit was inaccurate (a font reference existed in one
+  stylesheet, not two) instead of silently working around it.
+- **It diagnosed its environment instead of trusting the brief.** Told that
+  edits would be served immediately, it proved the server cached templates in
+  memory (CSS edits live, template edits not), split its verification strategy
+  accordingly, and reported which changes still needed a restart and an eyeball.
+  It also discovered the site's homepage route no longer served the file
+  everyone assumed it did.
+- **Proof over confidence on the riskiest change.** Before deleting a wall of
+  `!important` overrides, it argued the removal safe from CSS cascade rules
+  (specificity and source order), verified rendered computed styles on the live
+  pages it could reach, and still listed the one cached-template case for the
+  owner's manual check.
+
+Cost, honestly: roughly 415k output tokens and about 70 minutes across the two
+implementation runs, on top of the audit. That is the price of the discipline at
+real-project scale. The owner's verdict after both visual passes: merged, no
+rework.
