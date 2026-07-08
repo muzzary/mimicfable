@@ -27,18 +27,20 @@ tools, add a flag:
 --cursor       Cursor                    --uninstall    remove everything
 ```
 
-Existing config files are never touched: instructions go inside marker comments, and
-uninstall removes only those. Verify it yourself with `npm test`.
+Existing config files are never touched: instructions go inside marker comments
+(see [bin/install.js](bin/install.js), readable in one sitting), and uninstall
+removes only those. Verify it yourself with `npm test`
+([test/install.test.js](test/install.test.js)).
 
 ## What's inside
 
 | | |
 |---|---|
-| `fable-engineer.md` | Full-lifecycle agent: phased builds, tests per phase, self-review, final gate |
-| `skills/` | fable-problem-solving, fable-code-craft, fable-phase-planning, fable-scope-control |
-| `PORTABLE.md` | Tool-agnostic version of all of the above |
-| `tasks/` + `grade*.py` | The benchmark: 8 task types, hidden graders |
-| `results/` | Every delivered solution and verbatim report, so you can check our grading |
+| [fable-engineer.md](fable-engineer.md) | Full-lifecycle agent: phased builds, tests per phase, self-review, final gate |
+| [skills/](skills) | [problem-solving](skills/fable-problem-solving.md) · [code-craft](skills/fable-code-craft.md) · [phase-planning](skills/fable-phase-planning.md) · [scope-control](skills/fable-scope-control.md) |
+| [PORTABLE.md](PORTABLE.md) | Tool-agnostic version of all of the above |
+| [tasks/](tasks) + [graders](grade.py) | The benchmark: 8 task types, hidden graders |
+| [results/](results) | Every delivered solution and verbatim report, so you can check our grading |
 
 ## Results, in three sentences
 
@@ -73,6 +75,6 @@ just as correct on small tasks. That is what our own benchmark shows.
 
 ## Contributing
 
-MIT licensed. The obvious lanes: new benchmark tasks, runs on other models, and
+[MIT licensed](LICENSE). The obvious lanes: new benchmark tasks, runs on other models, and
 instruction targets for more tools (Windsurf, Aider, Zed). Keep the honesty rule:
 findings need evidence, and results that do not replicate get corrected, not buried.

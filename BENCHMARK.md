@@ -14,9 +14,9 @@ on identical coding tasks.
 - **Date:** 2026-07-07 · **Model (both conditions):** `claude-opus-4-8` via the Claude Code
   Agent tool · **Machine:** Windows 10, Python 3.13.3, git 2.49
 - **Conditions:** identical task prompts and isolated git repos. The *fable* condition's
-  prompt additionally instructed the agent to adopt `fable-engineer.md` as its operating
+  prompt additionally instructed the agent to adopt [fable-engineer.md](fable-engineer.md) as its operating
   instructions. The *baseline* condition received no extra instructions.
-- **Grading:** hidden checker (`grade.py`) with spec checks the agents never saw, validated
+- **Grading:** hidden checker ([grade.py](grade.py)) with spec checks the agents never saw, validated
   before the runs (it fails the original buggy code and passes a reference solution).
   Lines of code counted as non-blank, non-comment lines of the solution file.
 
@@ -109,7 +109,7 @@ The four skills were tested separately from the agent:
 - **Review test** (t5, three planted bugs plus style bait): both conditions found all
   three bugs and the dead code. The skill-guided review attached a concrete failure
   scenario to every finding and reported zero style nitpicks; the baseline included a
-  docstring nitpick. Verbatim reports in `results/*/t5_review/`.
+  docstring nitpick. Verbatim reports: [skill](results/skill/t5_review/REVIEW.md) / [baseline](results/baseline_skill/t5_review/REVIEW.md).
 - **Debugging test** (t6, crash whose root cause was a truthiness bug): tie, 2/2
   hidden checks both sides.
 - **Scope test** (t7, one bug in a repo full of bait): both fixed it 4/4 with
@@ -117,7 +117,7 @@ The four skills were tested separately from the agent:
   kept build artifacts untracked; the baseline committed a compiled `.pyc` file.
 - **Planning test** (t8, same CLI spec planned by both): both strong; the skill plan
   had a runnable acceptance test on all six phases (baseline 4/6) and an explicit
-  out-of-scope list (baseline none). Verbatim plans in `results/*/t8_plan/`.
+  out-of-scope list (baseline none). Verbatim plans: [skill](results/skill/t8_plan/PLAN.md) / [baseline](results/baseline_skill/t8_plan/PLAN.md).
 
 Honest read: on single runs the skills sharpen output discipline more than they
 change what gets found.
@@ -144,7 +144,7 @@ the disciplined baseline is also the realistic one.
 ## Reproducing
 
 1. Install the agent definition at `~/.claude/agents/fable-engineer.md`.
-2. Recreate the three task folders from the specs above (or reuse this repo's `tasks/`).
+2. Recreate the three task folders from the specs above (or reuse this repo's [tasks/](tasks)).
 3. Run each task twice via the Claude Code Agent tool (model `opus`): once prefixed with
    "adopt fable-engineer.md as your operating instructions", once without.
 4. Grade with `grade.py <task> <run_dir>`.
