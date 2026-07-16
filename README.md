@@ -4,6 +4,10 @@
 
 # mimicfable
 
+[![CI](https://github.com/muzzary/mimicfable/actions/workflows/ci.yml/badge.svg)](https://github.com/muzzary/mimicfable/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![node](https://img.shields.io/badge/node-%3E%3D16-339933?logo=node.js&logoColor=white)](package.json)
+
 Claude Fable 5 works with unusual discipline: it gathers context before acting, commits
 to one diagnosis instead of hedging, writes only load-bearing code, and never says
 "done" without watching the thing run. mimicfable packages that discipline as an
